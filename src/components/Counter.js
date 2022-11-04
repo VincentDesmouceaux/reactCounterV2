@@ -1,8 +1,4 @@
-import "./App.css";
-import { useState } from "react";
-import Counter from "./components/Counter";
-
-function App() {
+const Counter = () => {
   const [counter, setCounter] = useState(0);
 
   const handleClick = (action) => {
@@ -14,7 +10,6 @@ function App() {
       setCounter(0);
     }
   };
-
   return (
     <div className="container">
       <header className="container">
@@ -56,9 +51,8 @@ function App() {
           Reset
         </button>
       </div>
-      <Counter></Counter>
     </div>
   );
-}
+};
 
-export default App;
+export default Counter;
