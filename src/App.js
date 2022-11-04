@@ -1,62 +1,76 @@
 import "./App.css";
 import { useState } from "react";
-import Counter from "./components/Counter";
 
 function App() {
-  const [counter, setCounter] = useState(0);
+  const [counters, setCounterS] = useState([0, 4]);
 
   const handleClick = (action) => {
     if (action === "minus") {
-      setCounter(counter - 1);
+      setCounterS(counters - 1);
     } else if (action === "plus") {
-      setCounter(counter + 1);
+      setCounterS(counters + 1);
     } else if (action === "reset") {
-      setCounter(0);
+      setCounterS(0);
     }
   };
 
   return (
-    <div className="container">
-      <header className="container">
-        <i class="fa-solid fa-hourglass-start"></i>
-        <span>React Counter V2</span>
-      </header>
+    <div>
+      {counters.map((counter) => {
+        console.log(
+          <div className="container">
+            <header className="container">
+              <i class="fa-solid fa-hourglass-start"></i>
+              <span>React Counter V2</span>
+            </header>
 
-      <div className="buttons-container">
-        <button className="add">Add Counter</button>
-        {counter !== 0 && (
-          <button
-            onClick={() => {
-              handleClick("minus");
-            }}
-          >
-            -
-          </button>
-        )}
+            <div className="buttons-container">
+              <button
+                className="add"
+                onClick={() => {
+                  const newCounter = [...counters];
+                  newCounter.push(<div className="container"></div>);
+                  setCounterS(newCounter);
+                }}
+              >
+                Add Counter
+              </button>
 
-        <span>{counter}</span>
+              {counters !== 0 && (
+                <button
+                  onClick={() => {
+                    handleClick("minus");
+                  }}
+                >
+                  -
+                </button>
+              )}
 
-        {counter !== 10 && (
-          <button
-            onClick={() => {
-              handleClick("plus");
-            }}
-          >
-            +
-          </button>
-        )}
-      </div>
-      <div className="center">
-        <button
-          onClick={() => {
-            handleClick("reset");
-          }}
-          className="reset"
-        >
-          Reset
-        </button>
-      </div>
-      <Counter></Counter>
+              <span>{counters}</span>
+
+              {counters !== 10 && (
+                <button
+                  onClick={() => {
+                    handleClick("plus");
+                  }}
+                >
+                  +
+                </button>
+              )}
+            </div>
+            <div className="center">
+              <button
+                onClick={() => {
+                  handleClick("reset");
+                }}
+                className="reset"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
